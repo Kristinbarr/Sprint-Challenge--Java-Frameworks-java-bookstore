@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name="autherbooks")
@@ -43,5 +44,24 @@ public class AuthorBooks extends Auditable implements Serializable {
     public void setBook(Book book) {
         this.book = book;
     }
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+        {
+            return true;
+        }
+        if (!(o instanceof AuthorBooks))
+        {
+            return false;
+        }
+        AuthorBooks that = (AuthorBooks) o;
+        return Objects.equals(getAuthor(), that.getAuthor()) && Objects.equals(getBook(), that.getBook());
+    }
 
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(getAuthor(), getBook());
+    }
 }

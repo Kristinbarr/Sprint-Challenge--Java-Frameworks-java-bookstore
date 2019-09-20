@@ -1,11 +1,14 @@
 package com.lambdaschool.starthere.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@ApiModel(value = "Author", description = "The Author Entity")
 @Entity
 @Table(name = "author")
 public class Author extends Auditable {
@@ -19,9 +22,10 @@ public class Author extends Auditable {
     private String lastname;
     private String firstname;
 
-    @OneToMany(mappedBy = "book",
+    @ApiModelProperty(name = "books", value = "List of Author Books")
+    @OneToMany(mappedBy = "author",
             cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("book")
+    @JsonIgnoreProperties("author")
     private List<AuthorBooks> authorBooks = new ArrayList<>();
 
     public Author(String lastname, String firstname, List<AuthorBooks> authorBooks) {
