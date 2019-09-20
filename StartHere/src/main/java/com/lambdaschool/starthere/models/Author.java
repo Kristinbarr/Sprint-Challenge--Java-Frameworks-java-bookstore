@@ -19,19 +19,22 @@ public class Author extends Auditable {
 
     @Column(unique = true,
             nullable = false)
-    private String lastname;
     private String firstname;
+    private String lastname;
 
     @ApiModelProperty(name = "books", value = "List of Author Books")
     @OneToMany(mappedBy = "author",
             cascade = CascadeType.ALL)
     @JsonIgnoreProperties("author")
-    private List<AuthorBooks> authorBooks = new ArrayList<>();
+    private List<Wrote> wrote = new ArrayList<>();
 
-    public Author(String lastname, String firstname, List<AuthorBooks> authorBooks) {
-        this.lastname = lastname;
+    public Author() {
+    }
+
+    public Author(String firstname, String lastname, List<Wrote> wrote) {
         this.firstname = firstname;
-        this.authorBooks = authorBooks;
+        this.lastname = lastname;
+        this.wrote = wrote;
     }
 
     public long getAuthorid() {
@@ -42,14 +45,6 @@ public class Author extends Auditable {
         this.authorid = authorid;
     }
 
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
     public String getFirstname() {
         return firstname;
     }
@@ -58,11 +53,19 @@ public class Author extends Auditable {
         this.firstname = firstname;
     }
 
-    public List<AuthorBooks> getAuthorBooks() {
-        return authorBooks;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setAuthorBooks(List<AuthorBooks> authorBooks) {
-        this.authorBooks = authorBooks;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public List<Wrote> getWrote() {
+        return wrote;
+    }
+
+    public void setWrote(List<Wrote> wrote) {
+        this.wrote = wrote;
     }
 }

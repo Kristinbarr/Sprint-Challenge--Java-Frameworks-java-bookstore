@@ -7,24 +7,24 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name="autherbooks")
-public class AuthorBooks extends Auditable implements Serializable {
+@Table(name="wrote")
+public class Wrote extends Auditable implements Serializable {
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "authorid")
-    @JsonIgnoreProperties({"authorbooks", "hibernateLazyInitializer"})
+    @JsonIgnoreProperties({"wrote", "hibernateLazyInitializer"})
     private Author author;
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bookid")
-    @JsonIgnoreProperties({"authorbooks", "hibernateLazyInitializer"})
+    @JsonIgnoreProperties({"wrote", "hibernateLazyInitializer"})
     private Book book;
 
-    public AuthorBooks() {}
+    public Wrote() {}
 
-    public AuthorBooks(Author author, Book book) {
+    public Wrote(Author author, Book book) {
         this.author = author;
         this.book = book;
     }
@@ -44,6 +44,7 @@ public class AuthorBooks extends Auditable implements Serializable {
     public void setBook(Book book) {
         this.book = book;
     }
+
     @Override
     public boolean equals(Object o)
     {
@@ -51,11 +52,11 @@ public class AuthorBooks extends Auditable implements Serializable {
         {
             return true;
         }
-        if (!(o instanceof AuthorBooks))
+        if (!(o instanceof Wrote))
         {
             return false;
         }
-        AuthorBooks that = (AuthorBooks) o;
+        Wrote that = (Wrote) o;
         return Objects.equals(getAuthor(), that.getAuthor()) && Objects.equals(getBook(), that.getBook());
     }
 
