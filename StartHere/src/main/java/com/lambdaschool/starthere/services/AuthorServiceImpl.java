@@ -3,6 +3,7 @@ package com.lambdaschool.starthere.services;
 import com.lambdaschool.starthere.models.Author;
 import com.lambdaschool.starthere.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,9 +19,9 @@ public class AuthorServiceImpl implements AuthorService {
     private AuthorRepository authorrepo;
 
     @Transactional
-    public List<Author> findAll() throws EntityNotFoundException {
+    public List<Author> findAll(Pageable pageable) throws EntityNotFoundException {
         List<Author> list = new ArrayList<>();
-        authorrepo.findAll().iterator().forEachRemaining(list::add);
+        authorrepo.findAll(pageable).iterator().forEachRemaining(list::add);
         return list;
     }
 

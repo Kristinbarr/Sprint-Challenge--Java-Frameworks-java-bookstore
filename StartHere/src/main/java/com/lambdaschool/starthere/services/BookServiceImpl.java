@@ -4,6 +4,7 @@ import com.lambdaschool.starthere.exceptions.ResourceNotFoundException;
 import com.lambdaschool.starthere.models.Book;
 import com.lambdaschool.starthere.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -16,9 +17,9 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private BookRepository bookRepository;
 
-    public List<Book> findAll() throws EntityNotFoundException {
+    public List<Book> findAll(Pageable pageable) throws EntityNotFoundException {
         List<Book> list = new ArrayList<>();
-        bookRepository.findAll().iterator().forEachRemaining(list::add);
+        bookRepository.findAll(pageable).iterator().forEachRemaining(list::add);
         return list;
     }
 
@@ -41,6 +42,13 @@ public class BookServiceImpl implements BookService {
 
         return bookRepository.save(newBook);
     }
+
+
+    @Override
+    public void addWrote(long bookid, long authorid) {
+
+    }
+
 
     @Override
     public void delete(long id) {
