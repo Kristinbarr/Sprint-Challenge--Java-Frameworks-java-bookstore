@@ -10,6 +10,8 @@ public interface BookService {
 
     List<Book> findAll(Pageable pageable);
 
+//    Book findById(long id);
+
     Book update(Book book, long id);
 
     void addWrote(long bookid,long authorid);
